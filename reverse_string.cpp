@@ -5,11 +5,8 @@
 
 using namespace std;
 
-void ReverseString()
+string ReverseString(string s)
 {
-    string s = "this is the normal string to be reversed";
-    cout << s << endl;
-    cout << "reversing\n";
     size_t beg = 0, end = s.size() - 1;
     while (beg < end)
     {
@@ -19,7 +16,24 @@ void ReverseString()
         ++beg;
         --end;
     }
+    return s;
+}
+
+void ReverseString()
+{
+    string s = "this is the normal string to be reversed";
     cout << s << endl;
+    cout << "reversing\n";
+    string rs = ReverseString(s);
+    cout << rs << endl;
+    cout << "this is string is " << (s == rs ? "" : "not ") << "a palindrome\n";
+
+    s = "stellawonnowallets";
+    cout << s << endl;
+    cout << "reversing\n";
+    rs = ReverseString(s);
+    cout << rs << endl;
+    cout << "this is string is " << (s == rs ? "" : "not ") << "a palindrome\n";
 }
 
 ADD_INTERVIEW_QUESTION(ReverseString);
