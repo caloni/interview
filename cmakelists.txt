@@ -1,10 +1,11 @@
 cmake_minimum_required (VERSION 2.8.11)
 project (interview)
 add_executable (interview README.md interview.cpp interview.hpp
-    reverse_string.cpp
-    matching_characters.cpp
-    vowels_and_consonants.cpp
     anagrams.cpp
     count_string.cpp
+    matching_characters.cpp
+    numerical_digits.cpp
+    reverse_string.cpp
     rotation_mutually.cpp
+    vowels_and_consonants.cpp
 )
