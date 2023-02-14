@@ -10,5 +10,14 @@ In order to do this a numeric id is returned in the function AddInterviewQuestio
 
 void Question2();
 
-static int st_questionId = AddInterviewQuestion(Question2); // called before main().
+static int st_questionId = AddInterviewQuestion("Question2", Question2); // called before main().
+```
+
+A macro is available to make easier to padronize the implementation in each module:
+
+```//question2.cpp
+
+void Question2();
+
+ADD_INTERVIEW_QUESTION(Question2);
 ```

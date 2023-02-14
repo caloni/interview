@@ -21,8 +21,9 @@ int main()
 
   for (const auto& question : g_questions)
   {
-      cout << "*** " << question.first << " ***" << endl;
+      cout << "*** " << question.first << " BEGIN ***" << endl;
       question.second();
+      cout << "*** " << question.first << " END ***" << endl;
   }
 }
 
