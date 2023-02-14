@@ -2,5 +2,5 @@
 
 typedef void (*InterviewQuestion)();
 
-void AddInterviewQuestion(const char* name, InterviewQuestion question);
+int AddInterviewQuestion(const char* name, InterviewQuestion question);
 

@@ -8,9 +8,10 @@ using namespace std;
 map<string, InterviewQuestion> g_questions;
 
 
-void AddInterviewQuestion(const char* name, InterviewQuestion question)
+int AddInterviewQuestion(const char* name, InterviewQuestion question)
 {
     g_questions[name] = question;
+    return (int) g_questions.size();
 }
 
 
