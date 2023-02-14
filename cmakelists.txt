@@ -3,4 +3,5 @@ project (interview)
 add_executable (interview README.md interview.cpp interview.hpp
     reverse_string.cpp
     matching_characters.cpp
+    vowels_and_consonants.cpp
 )
