@@ -6,4 +6,5 @@ add_executable (interview README.md interview.cpp interview.hpp
     vowels_and_consonants.cpp
     anagrams.cpp
     count_string.cpp
+    rotation_mutually.cpp
 )
