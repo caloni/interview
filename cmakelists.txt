@@ -5,6 +5,7 @@ add_executable (interview README.md interview.cpp interview.hpp
     count_string.cpp
     first_unique_character.cpp
     matching_characters.cpp
+    matching_integers.cpp
     missing_number.cpp
     numerical_digits.cpp
     reverse_string.cpp
