@@ -6,6 +6,7 @@ add_executable (interview README.md interview.cpp interview.hpp
     count_string.cpp
     extreme_numbers.cpp
     first_unique_character.cpp
+    insertion_sort.cpp
     matching_characters.cpp
     matching_integers.cpp
     missing_number.cpp
