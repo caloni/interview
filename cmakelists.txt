@@ -13,6 +13,7 @@ add_executable (interview README.md interview.cpp interview.hpp
     numerical_digits.cpp
     reverse_string.cpp
     rotation_mutually.cpp
+    second_largest.cpp
     unique_integers.cpp
     vowels_and_consonants.cpp
 )
