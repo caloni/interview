@@ -8,6 +8,7 @@ add_executable (interview README.md interview.cpp interview.hpp
     extreme_numbers.cpp
     first_unique_character.cpp
     insertion_sort.cpp
+    linked_list_middle.cpp
     matching_characters.cpp
     matching_integers.cpp
     missing_number.cpp
