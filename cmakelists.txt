@@ -12,6 +12,7 @@ add_executable (interview README.md interview.cpp interview.hpp
     matching_integers.cpp
     missing_number.cpp
     numerical_digits.cpp
+    remove_special_characters.cpp
     reverse_string.cpp
     rotation_mutually.cpp
     second_largest.cpp
