@@ -27,7 +27,7 @@ void ExtremeNumbers(const vector<int>& array, int& biggest, int& smallest)
     });
 }
 
-void ConstructRandomRange(vector<int>& array, int size, int begin, int end)
+static void ConstructRandomRange(vector<int>& array, int size, int begin, int end)
 {
     std::random_device random_device;
     std::mt19937 random_engine(random_device());
