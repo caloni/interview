@@ -11,7 +11,7 @@ struct LinkedList
     shared_ptr<LinkedList> next;
 };
 
-shared_ptr<LinkedList> ConstructLinkedList(int elements)
+static shared_ptr<LinkedList> ConstructLinkedList(int elements)
 {
     shared_ptr<LinkedList> head = make_shared<LinkedList>();
     head->value = 0;
@@ -26,7 +26,7 @@ shared_ptr<LinkedList> ConstructLinkedList(int elements)
     return head;
 }
 
-shared_ptr<LinkedList> TraverseToTheMidle(shared_ptr<LinkedList>& head)
+shared_ptr<LinkedList> LinkedListTraverseToTheMiddle(shared_ptr<LinkedList>& head)
 {
     shared_ptr<LinkedList> next = head;
     shared_ptr<LinkedList> nextDouble = head;
@@ -45,32 +45,32 @@ shared_ptr<LinkedList> TraverseToTheMidle(shared_ptr<LinkedList>& head)
     return next;
 }
 
-void TraverseToTheMidle()
+void LinkedListTraverseToTheMiddle()
 {
     shared_ptr<LinkedList> head = ConstructLinkedList(10);
-    shared_ptr<LinkedList> middle = TraverseToTheMidle(head);
+    shared_ptr<LinkedList> middle = LinkedListTraverseToTheMiddle(head);
     cout << "middle in linked list with 10 elements: " << middle->value << endl;
 
     head = ConstructLinkedList(100);
-    middle = TraverseToTheMidle(head);
+    middle = LinkedListTraverseToTheMiddle(head);
     cout << "middle in linked list with 100 elements: " << middle->value << endl;
 
     head = ConstructLinkedList(1);
-    middle = TraverseToTheMidle(head);
+    middle = LinkedListTraverseToTheMiddle(head);
     cout << "middle in linked list with 1 element: " << middle->value << endl;
 
     head = ConstructLinkedList(2);
-    middle = TraverseToTheMidle(head);
+    middle = LinkedListTraverseToTheMiddle(head);
     cout << "middle in linked list with 2 elements: " << middle->value << endl;
 
     head = ConstructLinkedList(3);
-    middle = TraverseToTheMidle(head);
+    middle = LinkedListTraverseToTheMiddle(head);
     cout << "middle in linked list with 3 elements: " << middle->value << endl;
 
     head = ConstructLinkedList(0);
-    middle = TraverseToTheMidle(head);
+    middle = LinkedListTraverseToTheMiddle(head);
     cout << "middle in linked list with 0 elements: " << middle->value << endl;
 }
 
-ADD_INTERVIEW_QUESTION(TraverseToTheMidle);
+ADD_INTERVIEW_QUESTION(LinkedListTraverseToTheMiddle);
 
