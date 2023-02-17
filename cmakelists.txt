@@ -6,6 +6,7 @@ add_executable (interview README.md interview.cpp interview.hpp
     bubble_sort.cpp
     count_string.cpp
     extreme_numbers.cpp
+    fibonacci.cpp
     first_unique_character.cpp
     insertion_sort.cpp
     linked_list_count.cpp
@@ -20,6 +21,7 @@ add_executable (interview README.md interview.cpp interview.hpp
     numerical_digits.cpp
     prime_number.cpp
     remove_special_characters.cpp
+    reverse_number.cpp
     reverse_string.cpp
     rotation_mutually.cpp
     second_largest.cpp
