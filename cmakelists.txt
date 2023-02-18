@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.8.11)
 project (interview)
-add_executable (interview README.md interview.cpp interview.hpp
+add_executable (interview .gitignore README.md Doxyfile interview.cpp interview.hpp
     anagrams.cpp
     array_reversal.cpp
     bubble_sort.cpp
