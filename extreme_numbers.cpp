@@ -8,6 +8,25 @@
 
 using namespace std;
 
+/** Determine the largest and the smallest element of an array which
+is not sorted.
+
+Answer: To determine the largest and the smallest element of an array
+the below steps need to be followed:
+
+- Traverse the array, and monitor the maximum element found so far,
+till we are at the border of the array, the largest element is achieved.
+- Traverse the array, and monitor the minimum element found so far,
+till we are at the border of the array, the smallest element is achieved.
+
+In this implementation is being used the bigger and smallest integer
+defined by the libc. However, if you don't have this luxury, just use
+the first element for both.
+
+There is a bug in this routine. If the array is empty the return for
+the biggers and the smallest will be, respecively, the smallest and
+the biggest. But is this really a bug or a feature?
+*/
 void ExtremeNumbers(const vector<int>& array, int& biggest, int& smallest)
 {
     biggest = INT_MIN;

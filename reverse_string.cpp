@@ -5,6 +5,26 @@
 
 using namespace std;
 
+/** How can you reverse a string?
+
+Answer: String is reversed with the following algorithm:
+
+ - The string which is to be reversed is declared.
+ - Get the length of the string.
+ - Start a loop and then swap the position of the array elements.
+ - Keep the exchanged positions.
+ - Print the reversed string.
+
+What is a palindrome string?
+
+Answer: After the string is reversed as discussed in Q #1, we need to put
+the following condition: the palindrome string is the one which on reversing
+remains the same, for example, – 'madam' is a palindrome string.
+
+The key here is just to swap the beginning and ends until the begin index is
+bigger (or equal) than the end index, in other words, both have passed the 
+middle of the string.
+*/
 string ReverseString(string s)
 {
     size_t beg = 0, end = s.size() - 1;

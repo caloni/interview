@@ -10,6 +10,25 @@
 
 using namespace std;
 
+/** Explain the reversal of an array.
+
+Answer: Array reversal is performed in the following ways:
+
+- Take an array with elements.
+- Now exchange the position of the first element with the final element,
+and similarly the second element with the penultimate element.
+- This will continue until the entire array is reversed.
+
+In order to do this the key is to get indexes for the first and the
+final element and implement a loop and increment the first and
+decrement the laste; the exit condition is when the indexes are 
+in the 'wrong' direction, in other words, the first index is bigger 
+than the final index, meaning they already passed by the middle.
+
+Note that this already work with arrays with one element, where the 
+final index will be the first one, and with an empty array, where
+the final index will be negative (size = 0 minus one = -1).
+*/
 vector<int> ArrayReversal(vector<int> array)
 {
     size_t i = 0, j = array.size() - 1;

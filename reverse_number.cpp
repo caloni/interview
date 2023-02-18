@@ -5,6 +5,18 @@
 
 using namespace std;
 
+/** How to reverse a number?
+
+Answer: Reversal of a number is achieved in the following steps:
+
+- Take out the rightmost digit of the number.
+- Sum up the digit with the new reversed number.
+- Perform multiplication by 10.
+- Divide the number by 10.
+
+A much more simple logic is to convert it to string and
+reverse the string. I would go that way in a interview.
+*/
 int ReverseNumber(int number)
 {
     string s = to_string(number);

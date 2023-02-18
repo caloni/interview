@@ -10,6 +10,25 @@
 
 using namespace std;
 
+/** Determine the second largest element of an array.
+
+Answer: The second largest element of an array can be computed by
+the following steps:
+
+- State the largest element as the first element of the array and the
+second largest element as the second element of the array.
+- Iterate through the loop for traversing the array.
+- IF arry[i] is greater than the largest element THEN
+- Second element ? largest element
+- Largest element ?arry[i]
+- IF second element is less than arry[i] THEN
+- Second element?arry[i]
+
+To solve second elements issues we must always have two variables. The
+first one is the first element and the second one the second element. We
+start with the first and seconds elements and traverse all the way, always
+moving first and second accordingly.
+*/
 int SecondLargest(vector<int> array)
 {
     if (array.empty()) return 0;

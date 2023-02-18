@@ -6,6 +6,20 @@
 
 using namespace std;
 
+/** How to calculate the number of numerical digits in a string?
+
+Answer: To calculate the number of digits in a string, the below
+steps are followed:
+
+- Get the string on which count has to be performed
+- Use the replaceAll function, which replaces all the numerical
+digits with "".
+- Get the length of the string without digits.
+
+There is a simpler strategy than the answer above that is to
+simply count when the character is a digit. In C/C++ there is
+this isdigit function, but it is not hard do implement.
+*/
 int NumericalDigits(string s)
 {
     // return count_if(s.begin(), s.end(), isdigit); // easy one

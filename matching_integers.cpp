@@ -8,6 +8,18 @@
 
 using namespace std;
 
+/** How to get the matching elements in an integer array?
+
+Answer: To get the matching elements in an integer array, the below
+steps are followed:
+
+- Build two loops.
+- In the first loop, collect elements one at a time and add up the number
+of instances of the selected element.
+
+This algorithm is an ineficient one, because it has to traverse twice
+the same array. This is the price of an unordered array, though.
+*/
 int MatchingIntegers(const vector<int>& array, set<int>& matching)
 {
     matching.clear();

@@ -6,6 +6,19 @@
 
 using namespace std;
 
+/** How to compute the first character of a string that is not repeated?
+
+Answer: To compute the first character of a string which is not repeated,
+the below steps are followed:
+
+- A Set data structure for the repeated characters and a list for the
+non-repeated character is taken.
+- After segregating the repeated and non-repeated, at the end of the
+iteration, the first element of the list is printed in the console.
+
+The catch of this algorithm is to remove from the unique set an element
+that is being repeated and putting it in the repeated set.
+*/
 char FirstUniqueCharacter(string s)
 {
     string repeated;

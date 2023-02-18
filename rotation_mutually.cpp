@@ -5,6 +5,21 @@
 
 using namespace std;
 
+/** How to verify if two strings are a rotation mutually?
+
+Answer: To verify if two strings are a rotation mutually, the below
+steps are followed:
+
+- Initialize the two strings in two variables.
+- Check if the length of two strings is similar, if not return false.
+- Join the string to itself.
+- Verify if the string which is rotated is present in the joined string.
+- If the result is true, the second string is a rotation of the first string.
+
+That is an awesome algorithm to detect this: we simply duplicate the string
+and try to find the second string inside this one. Every rotation possibility
+will be there in some point.
+*/
 bool RotationMutually(string s1, string s2)
 {
     if (s1.size() != s2.size()) return false;

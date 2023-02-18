@@ -10,6 +10,23 @@
 
 using namespace std;
 
+/** Implement the insertion sort algorithm.
+
+Answer: Implementation of insertion sort.
+
+The insertion sort is similar to how humans order a deck of cards, so is
+intuitive: divide the array in ordered and unordered. The division can
+be and index that begins in the second element and goes to the end of the
+array. You order first and second elements and move the third element. So
+you see where the third element fits into the "ordered array", or the 
+first and second elements, now divided by this index. If you keep that
+way in the end of the array all elements were disposed in the ordered
+position.
+
+This logic is good to mimic the human logic, step by step. Imagine
+a human picking up the third card, comparing with the second one,
+comparing with the first, so exchanging the first and third ones.
+*/
 vector<int> InsertionSort(vector<int> array)
 {
     for (size_t i = 1; i < array.size(); ++i)

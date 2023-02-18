@@ -6,6 +6,15 @@
 
 using namespace std;
 
+/** How to remove special characters in a string that is
+in lowercase?
+
+Answer: Special characters in a string can be removed by
+using the replaceAll function in Java.
+
+In C++ we just use the isalnum (is alphanumeric) function. In
+other languages is not difficult to implement.
+*/
 string RemoveSpecialCharacters(string s)
 {
     for (size_t i = 0; i < s.size(); ++i)

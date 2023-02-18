@@ -8,6 +8,20 @@
 
 using namespace std;
 
+/** How to delete the repeated elements in an integer array?
+
+Answer: To delete the repeated elements in an integer array, the below
+steps are followed:
+
+- Build a hashmap that will pick all the elements that are present before.
+- Loop through the array and verify if the element already exists in the
+hash map
+- If the result is true, array traversal is continued, otherwise, the
+element is printed out in the console.
+
+Another problem that is solved with a hash map. Hash maps are going to
+save the universe.
+*/
 template<typename T>
 void UniqueIntegers(const vector<T>& array, vector<T>& unique)
 {

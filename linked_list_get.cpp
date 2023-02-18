@@ -12,21 +12,19 @@ struct LinkedList
     shared_ptr<LinkedList> next;
 };
 
-static shared_ptr<LinkedList> ConstructLinkedList(int elements)
-{
-    shared_ptr<LinkedList> head = make_shared<LinkedList>();
-    head->value = 0;
+/** How to get the third node of a linked list?
 
-    auto next = head;
-    for (int i = 1; i <= elements; ++i)
-    {
-        next = next->next = make_shared<LinkedList>();
-        next->value = i;
-    }
+Answer: To get to the third node of the linked list the below steps
+are followed:
 
-    return head;
-}
+- Start a counter with a value 0.
+- Iterate through the linked list and perform these steps:
+- If the value of the counter is 3, then the present node is returned.
+- Counter is increased by 1.
+- Modify the present such that it implies to the next of the present.
 
+The counter for linked lists is the number of next iterations.
+*/
 shared_ptr<LinkedList> LinkedListGet(shared_ptr<LinkedList>& head, int position)
 {
     int curr = 0;
@@ -43,6 +41,21 @@ shared_ptr<LinkedList> LinkedListGet(shared_ptr<LinkedList>& head, int position)
     }
 
     return nullptr;
+}
+
+static shared_ptr<LinkedList> ConstructLinkedList(int elements)
+{
+    shared_ptr<LinkedList> head = make_shared<LinkedList>();
+    head->value = 0;
+
+    auto next = head;
+    for (int i = 1; i <= elements; ++i)
+    {
+        next = next->next = make_shared<LinkedList>();
+        next->value = i;
+    }
+
+    return head;
 }
 
 static ostream& operator << (ostream& os, shared_ptr<LinkedList> item)

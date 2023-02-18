@@ -5,6 +5,21 @@
 
 using namespace std;
 
+/** How to verify if a number is prime or not?
+
+Answer: To verify if a number is prime or not, the below
+steps are followed:
+
+- Start a loop from value 2(k) up to (number / 2)
+- If the number is perfectly divisible by k, then the number
+is non – prime.
+- If the number is not perfectly divisible except for 1 and by
+itself, then the number is prime.
+
+The same logic to get the factors of a number with a different
+result: if there is no round division between 2 and the number
+that number is a prime.
+*/
 bool PrimeNumber(int number)
 {
     if (number == 2) return true;

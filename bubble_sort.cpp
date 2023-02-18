@@ -10,11 +10,39 @@
 
 using namespace std;
 
+/** Explain the bubble sort algorithm.
+
+Answer: The bubble sort algorithm includes the following steps:
+
+- Begin from the first element, then perform a comparison with the following 
+element in the array.
+- If the present element is larger than the following element of the array,
+then swap their positions.
+- If the present element is lesser than the following element of the array,
+shift to the next element, and again repeat step 1.
+
+This is a dummy algorithm. Just traverse the array many times is required
+to move a very 'wrong' element (e.g. the first one must be the last). That
+can be accomplished by implementing two loops. The first one is from the
+beginning to the end. The second, inner one, must be from the beginning
+to the last minus 1. In this way the comparison could be using the index
+from the inner loop, and the times the loop will run is size * size-1.
+
+But, there is a quicker form for the inner loop: to skip the times where
+traversing the entire array the wrongest elements from the beginning will
+already be in the right place (first loop). So we just need that the next
+iteration traverse until the nth-element minus 1. And in the next iteration
+until the nth-element minus 2, and so on. We can accomplish that by using
+the first index to subtract to the end limit.
+
+Note that this works for two elements arrays (it is a simples comparison)
+and to a single element as well, since no comparison will be made.
+*/
 vector<int> BubbleSort(vector<int> array)
 {
     for (size_t i = 0; i < array.size(); ++i)
     {
-        for (size_t j = 0; j < array.size() - 1; ++j)
+        for (size_t j = 0; j < array.size() - 1 - i; ++j)
         {
             if (array[j] > array[j + 1])
             {

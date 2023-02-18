@@ -15,26 +15,23 @@ struct LinkedList
     shared_ptr<LinkedList> next;
 };
 
-static shared_ptr<LinkedList> ConstructRandomLinkedList(int size, int begin, int end)
-{
-    shared_ptr<LinkedList> head = make_shared<LinkedList>();
-    head->value = 0;
+/** What is the process of deleting matched elements from a linked list
+which is not sorted.
 
-    std::random_device random_device;
-    std::mt19937 random_engine(random_device());
-    std::uniform_int_distribution<int> distribution(begin, end);
+Answer: To delete matched elements from a linked list which is not sorted,
+the below steps are followed:
 
-    auto next = head;
-    for (int i = 0; i < size; ++i)
-    {
-        auto const randomNumber = distribution(random_engine);
-        next = next->next = make_shared<LinkedList>();
-        next->value = randomNumber;
-    }
+- Travel from the head to the tail of the linked list.
+- For every value in the linked list, verify if it’s already present in
+the hash table.
+- If the result is true, the element is not added to the hash table.
 
-    return head;
-}
+The approach bellow was to construct a second linked list. When a
+matched element is found it is ignored in the new list.
 
+A more economic approach would be to connect the next of the next and let
+the matched element without connections.
+*/
 shared_ptr<LinkedList> LinkedListRemoveEqual(shared_ptr<LinkedList> head)
 {
     shared_ptr<LinkedList> head2 = make_shared<LinkedList>();
@@ -56,6 +53,26 @@ shared_ptr<LinkedList> LinkedListRemoveEqual(shared_ptr<LinkedList> head)
     next2->next = nullptr;
 
     return head2;
+}
+
+static shared_ptr<LinkedList> ConstructRandomLinkedList(int size, int begin, int end)
+{
+    shared_ptr<LinkedList> head = make_shared<LinkedList>();
+    head->value = 0;
+
+    std::random_device random_device;
+    std::mt19937 random_engine(random_device());
+    std::uniform_int_distribution<int> distribution(begin, end);
+
+    auto next = head;
+    for (int i = 0; i < size; ++i)
+    {
+        auto const randomNumber = distribution(random_engine);
+        next = next->next = make_shared<LinkedList>();
+        next->value = randomNumber;
+    }
+
+    return head;
 }
 
 static ostream& operator << (ostream& os, shared_ptr<LinkedList> item)

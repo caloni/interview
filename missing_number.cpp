@@ -7,6 +7,30 @@
 
 using namespace std;
 
+/** How to search a missing number in an array that contains integers
+from 1 to 100?
+
+Answer: To search a missing number in an array which contains integers
+from 1 to 100, the below steps are followed:
+
+- Take an integer array with the numbers from 1 to 100.
+- Compute the sum of the numbers, the summation shall be= l*(l+1)/2,
+where l is the number of integers.
+- Perform subtraction of the missing element from the total addition of
+numbers.
+
+This is a mathematical one, or is simples to resolve using basic
+mathematics. And the math says that the sum of a range of numbers
+equals the number of integers versus this number plus one divided
+by two. It has relation with the simple average (in this case 50).
+
+The trick to implement it is to subtract every number from this total,
+so the remaining one will be the missing number from the range.
+
+Note that if the range doesn't start with 1 there must be a trick to
+capture the average for ranges that don't start with 1. The logic must
+be that there must be a average to detect the missing number.
+*/
 int FindMissingNumber(const vector<int>& array)
 {
     int integers = (int) array.size() + 1;
