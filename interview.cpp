@@ -1,3 +1,11 @@
+/** @mainpage
+* 
+* This is a set of interview common questions and its answers in C++ language.
+* Initially it was made based on the article
+* [Top 30 Programming / Coding Interview Questions & Answers].
+* 
+* [Top 30 Programming / Coding Interview Questions & Answers]: https://www.softwaretestinghelp.com/coding-interview-questions/
+*/
 #include "interview.hpp"
 #include <iostream>
 #include <map>
@@ -21,9 +29,9 @@ int main()
 
   for (const auto& question : g_questions)
   {
-      cout << "*** " << question.first << " BEGIN ***" << endl;
+      cout << "\n*** " << question.first << " BEGIN ***" << endl;
       question.second();
-      cout << "*** " << question.first << " END ***" << endl;
+      cout << "*** " << question.first << " END ***\n" << endl;
   }
 }
 
