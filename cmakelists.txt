@@ -18,6 +18,7 @@ add_executable (interview README.md interview.cpp interview.hpp
     matching_characters.cpp
     matching_integers.cpp
     missing_number.cpp
+    number_factors.cpp
     numerical_digits.cpp
     prime_number.cpp
     remove_special_characters.cpp
