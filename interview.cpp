@@ -1,3 +1,11 @@
+/** @mainpage
+* 
+* This is a set of interview common questions and its answers in C++ language.
+* Initially it was made based on the article
+* [Top 30 Programming / Coding Interview Questions & Answers].
+* 
+* [Top 30 Programming / Coding Interview Questions & Answers]: https://www.softwaretestinghelp.com/coding-interview-questions/
+*/
 #include "interview.hpp"
 #include <iostream>
 #include <map>
