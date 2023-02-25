@@ -4,6 +4,7 @@ add_executable (interview .gitignore README.md Doxyfile interview.cpp interview.
     anagrams.cpp
     array_reversal.cpp
     bubble_sort.cpp
+    compress_numbers_in_strings.cpp
     count_string.cpp
     extreme_numbers.cpp
     fibonacci.cpp
