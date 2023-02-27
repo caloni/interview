@@ -1,3 +1,4 @@
+// https://www.hackerrank.com/challenges/repeated-string/problem
 #include <stdc++.h>
 
 using namespace std;
