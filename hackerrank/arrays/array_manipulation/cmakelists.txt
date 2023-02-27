@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(array_manipulation array_manipulation.cpp)
+target_include_directories(array_manipulation PUBLIC ../../..)
