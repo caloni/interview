@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(repeated_strings repeated_string.cpp)
+target_include_directories(repeated_strings PUBLIC ../../..)
