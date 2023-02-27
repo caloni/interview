@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(counting_valleys counting_valleys.cpp)
+target_include_directories(counting_valleys PUBLIC ../../..)

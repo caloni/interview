@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(sales_by_match sales_by_match.cpp)
+target_include_directories(sales_by_match PUBLIC ../../..)

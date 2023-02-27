@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(jumping_on_the_clouds jumping_on_the_clouds.cpp)
+target_include_directories(jumping_on_the_clouds PUBLIC ../../..)
