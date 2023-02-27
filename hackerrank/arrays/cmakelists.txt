@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_subdirectory(2d_array_ds)
+add_subdirectory(arrays_left_rotation)
+add_subdirectory(minimum_swaps_2)
+add_subdirectory(new_year_chaos)

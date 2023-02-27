@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(minimum_swaps_2 minimum_swaps_2.cpp)
+target_include_directories(minimum_swaps_2 PUBLIC ../../..)
