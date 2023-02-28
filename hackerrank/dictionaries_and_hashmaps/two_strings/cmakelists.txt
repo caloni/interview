@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(two_strings two_strings.cpp)
+target_include_directories(two_strings PUBLIC ../../..)
