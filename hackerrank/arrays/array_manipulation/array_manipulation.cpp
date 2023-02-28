@@ -1,4 +1,5 @@
 // https://www.hackerrank.com/challenges/crush/problem
+// https://en.wikipedia.org/wiki/Segment_tree
 #include <stdc++.h>
 
 using namespace std;
@@ -14,30 +15,68 @@ vector<string> split(const string &);
  * The function accepts following parameters:
  *  1. INTEGER n
  *  2. 2D_INTEGER_ARRAY queries
+ *
+ * ChatGPT helped me to solve this problem with the code and explaining
+ * that the fastest solution to this problem is using a segment tree. A
+ * segment tree is like a binary tree that keeps the value in segments,
+ * avoiding the O(n) complexity using a binary search. In this way, to
+ * update the intervals in the problem is a recursive task using a 4-size
+ * array in that the position is structure as a binary tree. To the query
+ * for the lastest value we need to add all the values in each range. It
+ * is somewhat tricky for me to understand this part, but I got the
+ * general idea.
  */
 
-long arrayManipulation(int n, vector<vector<int>> queries) {
-    vector<long> arr(n);
-    for( long m = 0; m < (long) queries.size(); ++m ) {
-        const vector<int>& op = queries[m];
-        int a = op[0];
-        int b = op[1];
-        int k = op[2];
-        
-        while( a <= b ) {
-            arr[a-1] += k;
-            ++a;
+// Segment tree implementation
+
+void update(int v, int tl, int tr, int l, int r, int x, vector<long>& t) {
+    if (l > r) return;
+    if (l == tl && r == tr) {
+        t[v] += x;
+    }
+    else {
+        int tm = (tl + tr) / 2;
+        update(v * 2, tl, tm, l, min(r, tm), x, t);
+        update(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r, x, t);
+    }
+}
+
+long query(int v, int tl, int tr, int pos, vector<long>& t) {
+    if (tl == tr) {
+        return t[v];
+    }
+    else {
+        int tm = (tl + tr) / 2;
+        if (pos <= tm) {
+            return t[v] + query(v * 2, tl, tm, pos, t);
+        }
+        else {
+            return t[v] + query(v * 2 + 1, tm + 1, tr, pos, t);
         }
     }
-    
-    long maxValue = 1;
-    for( long number: arr ) {
-        if( number > maxValue )
-            maxValue = number;
-    }
-    
-    return maxValue;
 }
+
+long arrayManipulation(int n, vector<vector<int>> queries) {
+    int m = queries.size();
+
+    vector<long> t(4 * n); // segment tree of size 4 * n
+
+    for (int i = 0; i < m; i++) {
+        int l, r, x;
+        l = queries[i][0];
+        r = queries[i][1];
+        x = queries[i][2];
+        update(1, 1, n, l, r, x, t);
+    }
+
+    long max_val = 0;
+    for (int i = 1; i <= n; i++) {
+        max_val = max(max_val, query(1, 1, n, i, t));
+    }
+
+    return max_val;
+}
+
 
 int main()
 {
