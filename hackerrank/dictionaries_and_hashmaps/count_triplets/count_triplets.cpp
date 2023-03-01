@@ -3,35 +3,74 @@
 
 using namespace std;
 
-string ltrim(const string &);
-string rtrim(const string &);
-vector<string> split(const string &);
+string ltrim(const string&);
+string rtrim(const string&);
+vector<string> split(const string&);
+
+long long nChoosek(long n, long k)
+{
+    if (k > n) return 0;
+    if (k * 2 > n) k = n - k;
+    if (k == 0) return 1;
+
+    long long result = n;
+    for (long i = 2; i <= k; ++i) {
+        result *= (n - i + 1);
+        result /= i;
+    }
+    return result;
+}
 
 // Complete the countTriplets function below.
-long countTriplets(vector<long> arr, long r) {
-    long triplets = 0;
-    
-    // check the first index
-    for( int i = 0; i < arr.size()-2; ++i ) {
-        long second = arr[i] * r;
-        
-        // check the second index
-        for( int j = i+1; j < arr.size()-1; ++j ) {
-            if( arr[j] == second ) {
-                long third = second * r;
+long long countTriplets(vector<long> arr, long r) {
+    long long triplets = 0;
+    map<long, vector<int>> indexes;
 
-                // check the third index
-                for( int k = j+1; k < arr.size(); ++k ) {
-                    if( arr[k] == third ) {
-                        ++triplets;
+    // get the index for all numbers
+    for (int i = 0; i < arr.size(); ++i) {
+        indexes[arr[i]].push_back(i);
+    }
+
+    // check directly in the indexes
+    for (const auto& item : indexes) {
+        const vector<int>& firsts = item.second;
+        const auto& seconds = indexes.find(item.first * r);
+        const auto& thirds = indexes.find(item.first * r * r);
+
+        // the seconds and thirds are the same; apply combination formula
+        if (r == 1) {
+            triplets = nChoosek(firsts.size(), 3);
+        }
+        // we have seconds and thirds
+        else if (seconds != indexes.end() && thirds != indexes.end()) {
+
+            // for every first item of triplet
+            for (int firstIdx = 0; firstIdx < (int)firsts.size(); ++firstIdx) {
+                int firstPos = firsts[firstIdx];
+
+                // for every second item after the first
+                for (int secondIdx = 0; secondIdx < seconds->second.size(); ++secondIdx) {
+
+                    if (seconds->second[secondIdx] > firstPos) {
+                        int secondPos = seconds->second[secondIdx];
+
+                        // for every third item after the second
+                        for (int thirdIdx = 0; thirdIdx < thirds->second.size(); ++thirdIdx) {
+
+                            if (thirds->second[thirdIdx] > secondPos) {
+                                triplets += thirds->second.size() - thirdIdx;
+                                break;
+                            }
+                        }
                     }
                 }
             }
         }
     }
-    
+
     return triplets;
 }
+
 
 int main()
 {
@@ -59,7 +98,7 @@ int main()
         arr[i] = arr_item;
     }
 
-    long ans = countTriplets(arr, r);
+    long long ans = countTriplets(arr, r);
 
     fout << ans << "\n";
 
@@ -68,7 +107,7 @@ int main()
     return 0;
 }
 
-string ltrim(const string &str) {
+string ltrim(const string& str) {
     string s(str);
 
     s.erase(
@@ -79,7 +118,7 @@ string ltrim(const string &str) {
     return s;
 }
 
-string rtrim(const string &str) {
+string rtrim(const string& str) {
     string s(str);
 
     s.erase(
@@ -90,7 +129,7 @@ string rtrim(const string &str) {
     return s;
 }
 
-vector<string> split(const string &str) {
+vector<string> split(const string& str) {
     vector<string> tokens;
 
     string::size_type start = 0;
