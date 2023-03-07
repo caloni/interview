@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(sorting_comparator sorting_comparator.cpp)
+target_include_directories(sorting_comparator PUBLIC ../../..)
