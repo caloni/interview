@@ -14,9 +14,55 @@ vector<string> split(const string &);
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
+long countInversions(vector<int>& arr, int begin, int middle, int end) {
+    long inversions = 0;
+
+    // here the son cries and the mother does not see him
+    for (int k = 0; k < end; ++k) {
+        if (begin < middle && middle < end) {
+            if (arr[begin] > arr[middle]) {
+                arr.insert(arr.begin() + begin, arr[middle]);
+                arr.erase(arr.begin() + (middle + 1));
+                inversions += middle - begin;
+                ++middle;
+                ++begin;
+            }
+            else {
+                ++begin; // no inversion
+            }
+        } // else the rest if sorted
+    }
+    return inversions;
+}
+
+long countInversions(vector<int>& arr, int begin, int end) {
+    int size = end - begin;
+    if (size < 2) return 0;
+    if (size == 2) {
+        if (arr[begin] > arr[end - 1]) {
+            swap(arr[begin], arr[end - 1]);
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+    else {
+        long inversions = 0;
+        int middle = size / 2 + size % 2;
+        inversions += countInversions(arr, begin, middle);
+        inversions += countInversions(arr, middle, end);
+        inversions += countInversions(arr, begin, middle, end);
+        return inversions;
+    }
+}
+
 long countInversions(vector<int> arr) {
     long inversions = 0;
-    
+
+    inversions = countInversions(arr, 0, arr.size());
+
+    /*
     for( size_t i = 1; i < arr.size(); ++i ) {
         if( arr[i] < arr[i-1] ) {
             swap(arr[i], arr[i-1]);
@@ -24,12 +70,15 @@ long countInversions(vector<int> arr) {
             ++inversions;
         }
     }
+    */
     
     return inversions;
 }
 
 int main()
 {
+    bool debug = false;
+    while (!debug);
     ofstream fout(getenv("OUTPUT_PATH"));
 
     string t_temp;
