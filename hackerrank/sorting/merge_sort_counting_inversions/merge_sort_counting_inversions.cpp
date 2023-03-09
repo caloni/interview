@@ -17,21 +17,32 @@ vector<string> split(const string &);
 long countInversions(vector<int>& arr, int begin, int middle, int end) {
     long inversions = 0;
 
-    // here the son cries and the mother does not see him
-    for (int k = 0; k < end; ++k) {
+    int origBegin = begin, origMiddle = middle;
+    vector<int> buf(end - begin);
+    for (int k = 0; k < end - origBegin; ++k) {
         if (begin < middle && middle < end) {
             if (arr[begin] > arr[middle]) {
-                arr.insert(arr.begin() + begin, arr[middle]);
-                arr.erase(arr.begin() + (middle + 1));
-                inversions += middle - begin;
-                ++middle;
-                ++begin;
+                inversions += middle - (origBegin + k);
+                buf[k] = arr[middle++];
             }
             else {
-                ++begin; // no inversion
+                buf[k] = arr[begin++]; // no inversions
             }
-        } // else the rest if sorted
+        }
+        else {
+            if (begin < origMiddle) {
+                buf[k] = arr[begin++]; // no inversions
+            }
+            else {
+                inversions += middle - (origBegin + k);
+                buf[k] = arr[middle++];
+            }
+        }
     }
+    if (inversions) {
+        copy(buf.begin(), buf.end(), arr.begin() + origBegin);
+    }
+
     return inversions;
 }
 
@@ -50,9 +61,9 @@ long countInversions(vector<int>& arr, int begin, int end) {
     else {
         long inversions = 0;
         int middle = size / 2 + size % 2;
-        inversions += countInversions(arr, begin, middle);
-        inversions += countInversions(arr, middle, end);
-        inversions += countInversions(arr, begin, middle, end);
+        inversions += countInversions(arr, begin, begin + middle);
+        inversions += countInversions(arr, begin + middle, end);
+        inversions += countInversions(arr, begin, begin + middle, end);
         return inversions;
     }
 }
@@ -77,8 +88,8 @@ long countInversions(vector<int> arr) {
 
 int main()
 {
-    bool debug = false;
-    while (!debug);
+    //bool debug = false;
+    //while (!debug);
     ofstream fout(getenv("OUTPUT_PATH"));
 
     string t_temp;
