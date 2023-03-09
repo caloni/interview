@@ -12,84 +12,55 @@ vector<string> split(const string &);
  *
  * The function is expected to return a LONG_INTEGER.
  * The function accepts INTEGER_ARRAY arr as parameter.
+
+ ChatGPT: You can modify the merge sort algorithm to count the number of 
+ swaps. The idea is to count the number of swaps needed when merging 
+ the subarrays during the merge step of the merge sort algorithm.
  */
 
-long countInversions(vector<int>& arr, int begin, int middle, int end) {
+long mergeSort(vector<int>& arr, int begin, int end) {
     long inversions = 0;
 
-    int origBegin = begin, origMiddle = middle;
-    vector<int> buf(end - begin);
-    for (int k = 0; k < end - origBegin; ++k) {
-        if (begin < middle && middle < end) {
-            if (arr[begin] > arr[middle]) {
-                inversions += middle - (origBegin + k);
-                buf[k] = arr[middle++];
+    if (begin < end - 1) {
+        int middle = begin + (end - begin) / 2;
+        inversions += mergeSort(arr, begin, middle);
+        inversions += mergeSort(arr, middle, end);
+
+        vector<int> temp(end - begin);
+        int i = begin, j = middle, k = 0;
+
+        while (i < middle && j < end) {
+            if (arr[i] <= arr[j]) {
+                temp[k++] = arr[i++];
             }
             else {
-                buf[k] = arr[begin++]; // no inversions
+                inversions += middle - i;
+                temp[k++] = arr[j++];
             }
         }
-        else {
-            if (begin < origMiddle) {
-                buf[k] = arr[begin++]; // no inversions
-            }
-            else {
-                inversions += middle - (origBegin + k);
-                buf[k] = arr[middle++];
-            }
+
+        while (i < middle) {
+            temp[k++] = arr[i++];
         }
-    }
-    if (inversions) {
-        copy(buf.begin(), buf.end(), arr.begin() + origBegin);
+
+        while (j < end) {
+            temp[k++] = arr[j++];
+        }
+
+        copy(temp.begin(), temp.end(), arr.begin() + begin);
     }
 
     return inversions;
 }
 
-long countInversions(vector<int>& arr, int begin, int end) {
-    int size = end - begin;
-    if (size < 2) return 0;
-    if (size == 2) {
-        if (arr[begin] > arr[end - 1]) {
-            swap(arr[begin], arr[end - 1]);
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    }
-    else {
-        long inversions = 0;
-        int middle = size / 2 + size % 2;
-        inversions += countInversions(arr, begin, begin + middle);
-        inversions += countInversions(arr, begin + middle, end);
-        inversions += countInversions(arr, begin, begin + middle, end);
-        return inversions;
-    }
-}
-
 long countInversions(vector<int> arr) {
-    long inversions = 0;
-
-    inversions = countInversions(arr, 0, arr.size());
-
-    /*
-    for( size_t i = 1; i < arr.size(); ++i ) {
-        if( arr[i] < arr[i-1] ) {
-            swap(arr[i], arr[i-1]);
-            if( i > 1 ) i -= 2; // compare again with previous
-            ++inversions;
-        }
-    }
-    */
-    
+    int n = arr.size();
+    long inversions = mergeSort(arr, 0, n);
     return inversions;
 }
 
 int main()
 {
-    //bool debug = false;
-    //while (!debug);
     ofstream fout(getenv("OUTPUT_PATH"));
 
     string t_temp;
