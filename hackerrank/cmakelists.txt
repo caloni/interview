@@ -3,4 +3,5 @@ add_subdirectory(warmup)
 add_subdirectory(arrays)
 add_subdirectory(dictionaries_and_hashmaps)
 add_subdirectory(sorting)
+add_subdirectory(strings)
 
