@@ -1,3 +1,4 @@
 cmake_minimum_required(VERSION 3.21.1)
 add_subdirectory(making_anagrams)
+add_subdirectory(alternating_characters)
 
