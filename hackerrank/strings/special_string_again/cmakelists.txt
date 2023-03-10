@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(special_string_again special_string_again.cpp)
+target_include_directories(special_string_again PUBLIC ../../..)
