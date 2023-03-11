@@ -10,50 +10,44 @@ using namespace std;
  * The function accepts following parameters:
  *  1. STRING s1
  *  2. STRING s2
+
+ ChatGPT:
+
+The problem asks us to find the length of the longest common child of
+two input strings s1 and s2. To solve this problem, we can use dynamic 
+programming.
+
+We define a two-dimensional array dp of size (n+1)x(n+1), where n is 
+the length of the input strings. The dp[i][j] element of this array 
+represents the length of the longest common child of the substrings 
+s1[0:i] and s2[0:j].
+
+To fill the dp array, we use a nested loop that iterates over all 
+possible pairs of indices (i,j). At each iteration, we compare the 
+characters s1[i-1] and s2[j-1]. If they are the same, we add 1 to the 
+length of the longest common child found so far, which is stored in dp[i-1][j-1]. 
+If they are different, we take the maximum of the longest common child found 
+so far for s1[0:i-1] and s2[0:j] (i.e., dp[i-1][j]) and the longest common 
+child found so far for s1[0:i] and s2[0:j-1] (i.e., dp[i][j-1]).
+
+Finally, the value in the bottom-right corner of the dp array (dp[n][n]) 
+represents the length of the longest common child of the two input strings.
  */
 
 int commonChild(string s1, string s2) {
-    string child;
-    size_t i1 = 0, i2 = 0;
-    while (i1 < s1.size() && i2 < s2.size()) {
-        if (s1[i1] == s2[i2]) { // nothing to change
-            child.push_back(s1[i1]);
-            ++i1, ++i2;
-        }
-        else { // something has to change
-            size_t i2InI1 = s1.find(s2[i2], i1+1);
-            size_t i1InI2 = s2.find(s1[i1], i2+1);
-
-            if (i1InI2 != s2.npos && i2InI1 == s1.npos ) { // found one of two, then choose it
-                child.push_back(s1[i1]);
-                ++i1;
-                i2 = i1InI2 + 1;
+    int m = s1.size(), n = s2.size();
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1));
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (s1[i - 1] == s2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
             }
-            else if ( i2InI1 != s1.npos && i1InI2 == s2.npos) { // found one of two, then choose it
-                child.push_back(s2[i2]);
-                ++i2;
-                i1 = i2InI1 + 1;
-            }
-            else if (i1InI2 != s2.npos && i2InI1 != s1.npos) { // both are possible, then take the nearest one
-                size_t dist1In2 = i1InI2 - i1; // how many chars we going to eat
-                size_t dist2In1 = i2InI1 - i2; // how many chars we going to eat
-                if (dist1In2 < dist2In1) {
-                    child.push_back(s1[i1]);
-                    ++i1;
-                    i2 = i1InI2 + 1;
-                }
-                else {
-                    child.push_back(s2[i2]);
-                    ++i2;
-                    i1 = i2InI1 + 1;
-                }
-            }
-            else { // none are found; skip both
-                ++i1, ++i2;
+            else {
+                dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
             }
         }
     }
-    return (int) child.size();
+    return dp[m][n];
 }
 
 int main()
