@@ -3,4 +3,5 @@ add_subdirectory(making_anagrams)
 add_subdirectory(alternating_characters)
 add_subdirectory(sherlock_and_valid_strings)
 add_subdirectory(special_string_again)
+add_subdirectory(common_child)
 

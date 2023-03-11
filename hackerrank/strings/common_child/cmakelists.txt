@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(common_child common_child.cpp)
+target_include_directories(common_child PUBLIC ../../..)
