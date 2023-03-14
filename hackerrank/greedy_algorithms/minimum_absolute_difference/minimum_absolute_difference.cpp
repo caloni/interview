@@ -15,11 +15,12 @@ vector<string> split(const string &);
  */
 
 int minimumAbsoluteDifference(vector<int> arr) {
+    sort(arr.begin(), arr.end());
     int minAbsDiff = INT_MAX;
-    for( size_t i = 0; i < arr.size()-1; ++i ) {
-        for( size_t j = i+1; j < arr.size(); ++j ) {
-            int absDiff = abs(arr[i] - arr[j]);
-            minAbsDiff = min(minAbsDiff, absDiff);
+    for( size_t i = 1; i < arr.size(); ++i ) {
+        int absDiff = abs(arr[i] - arr[i-1]);
+        if (absDiff < minAbsDiff) {
+            minAbsDiff = absDiff;
         }
     }
     return minAbsDiff;
