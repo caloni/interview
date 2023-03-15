@@ -15,15 +15,15 @@ string rtrim(const string &);
  * The function accepts INTEGER_ARRAY nums as parameter.
  */
 
-string toBin(int num) {
-    ostringstream os;
-	os << bitset<31>(num);
-    return os.str();
-}
-
 int binCardinality(int num) {
-    string s = toBin(num);
-	return count(s.begin(), s.end(), '1');
+    int cardinality = 0;
+    while (num) {
+        if (num % 2) {
+            ++cardinality;
+        }
+        num /= 2;
+    }
+    return cardinality;
 }
 
 
@@ -33,8 +33,6 @@ vector<int> cardinalitySort(vector<int> nums) {
         if( c1 != c2 ) return c1 < c2;
         return i1 < i2;
     });
-    for (size_t i = 0; i < nums.size(); i++)
-        cout << nums[i] << ' ' << toBin(nums[i]) << ' ' << binCardinality(nums[i]) << endl;
     return nums;
 }
 
