@@ -5,4 +5,5 @@ add_subdirectory(dictionaries_and_hashmaps)
 add_subdirectory(sorting)
 add_subdirectory(strings)
 add_subdirectory(greedy_algorithms)
+add_subdirectory(flow_traders)
 
