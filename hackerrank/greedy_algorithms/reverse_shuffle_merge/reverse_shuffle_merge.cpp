@@ -11,29 +11,42 @@ using namespace std;
  */
 
 string reverseShuffleMerge(string s) {
-    map<char, int> charCounter;
-    for( char c: s ) ++charCounter[c];
-    string s1;
-    for (auto& c : charCounter) {
-        s1.append(c.second / 2, c.first);
+    map<char, int> notUsed, used, required;
+    for (char c : s) ++notUsed[c];
+    for (auto& nu : notUsed) required[nu.first] = nu.second / 2;
+    string a;
+    for (int i = s.size() - 1; i >= 0; --i) {
+        char c = s[i];
+        --notUsed[c];
+        if (a.empty()) {
+            a.push_back(c);
+            ++used[c];
+        }
+        else if (required[c] != used[c]) {
+            char lc = a[a.size() - 1];
+            if (lc <= c) {
+                a.push_back(c);
+                ++used[c];
+            }
+            else if (notUsed[lc] && notUsed[lc] > required[lc] - used[lc]) {
+                a.pop_back();
+                --used[lc];
+                lc = a.size() ? a[a.size() - 1] : 0;
+                while (lc > c && notUsed[lc] && notUsed[lc] > required[lc] - used[lc]) {
+                    a.pop_back();
+                    --used[lc];
+                    lc = a.size() ? a[a.size() - 1] : 0;
+                }
+                a.push_back(c);
+                ++used[c];
+            }
+            else {
+                a.push_back(c);
+                ++used[c];
+            }
+        }
     }
-    sort(s1.begin(), s1.end());
-    reverse(s.begin(), s.end());
-
-    do {
-        cout << s1;
-        size_t lastChar = 0;
-        for (size_t i = 0; i < s1.size(); ++i) {
-            lastChar = s.find(s1[i], lastChar);
-            if (lastChar == s.npos) break;
-            ++lastChar;
-        }
-        if (lastChar != s.npos) {
-            break;
-        }
-    } while (next_permutation(s1.begin(), s1.end()) );
-
-    return s1;
+    return a;
 }
 
 int main()
