@@ -16,13 +16,16 @@ vector<string> split(const string&);
  */
 
 void whatFlavors(vector<int> cost, int money) {
-    for (size_t i = 0; i < cost.size(); ++i) {
-        for (size_t j = i + 1; j < cost.size(); ++j) {
-            if (cost[i] + cost[j] == money) {
-                cout << i + 1 << ' ' << j + 1 << endl;
-                return;
-            }
+    map<int, int> flavors;
+    flavors[cost[0]] = 1;
+    for (int i = 1; i < cost.size(); ++i ) {
+        int f = money - cost[i];
+        auto fnd = flavors.find(f);
+        if (fnd != flavors.end()) {
+            cout << fnd->second << ' ' << i+1 << endl;
+            return;
         }
+        flavors[cost[i]] = i + 1;
     }
 }
 
