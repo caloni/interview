@@ -1,3 +1,4 @@
 cmake_minimum_required(VERSION 3.21.1)
 add_subdirectory(ice_cream_parlor)
+add_subdirectory(swap_nodes)
 
