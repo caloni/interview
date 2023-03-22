@@ -20,7 +20,8 @@ void traverseNodes(map<int, vector<int>>& nodes, vector<int>& visits,
     map<int, int>& nodeDepth, map<int, bool>& swaps,
     int node) {
 
-    int nodeValue = node == 1 ? 1 : nodes[node / 2][node % 2];
+    auto fndNode = nodes.find(node / 2);
+    int nodeValue = node == 1 ? 1 : fndNode != nodes.end() ? fndNode->second[node % 2] : -1;
     if (nodeValue == -1) return;
     int nodeLeft = node * 2;
     int nodeRight = node * 2 + 1;
@@ -50,23 +51,16 @@ vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) 
 
     // build nodes map to consider empty nodes
     map<int, vector<int>> nodes;
-    int nod = 1;
-    for (int i = 0; i < indexes.size(); ++i) {
-        if (nod == 1) {
-            nodes[nod++] = indexes[i];
-        }
-        else {
-            int parentNod = nodes[nod / 2][nod % 2];
-            if (parentNod != -1) {
-                nodes[nod++] = indexes[i];
-            }
-            else {
-                vector<int> empty{ -1, -1 };
-                nodes[nod++] = empty;
-                --i;
-            }
-        }
-    }
+    int idx = 0;
+    list<int> parents{ 1 };
+    do {
+        int parent = parents.front();
+        nodes[parent] = indexes[idx];
+        if (indexes[idx][0] != -1) parents.push_back(parent * 2);
+        if (indexes[idx][1] != -1) parents.push_back(parent * 2 + 1);
+        ++idx;
+        parents.pop_front();
+    } while (parents.size());
 
     // build each swap list before visiting tree
     map<int, bool> swaps;
