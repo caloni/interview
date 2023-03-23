@@ -18,13 +18,10 @@ vector<string> split(const string &);
 
 int pairs(int k, vector<int> arr) {
     int total = 0;
+    sort(arr.begin(), arr.end());
     set<int> numbers{ arr[0] };
     for( int i = 1; i < arr.size(); ++i ) {
-        int n1 = abs(arr[i] - k), n2 = arr[i] + k;
-        if( numbers.find(n1) != numbers.end() ) {
-            ++total;
-        }
-        if( numbers.find(n2) != numbers.end() ) {
+        if( numbers.find(arr[i] - k) != numbers.end() ) {
             ++total;
         }
         numbers.insert(arr[i]);
