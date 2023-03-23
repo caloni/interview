@@ -17,18 +17,16 @@ vector<string> split(const string &);
  */
 
 void traverseNodes(map<int, vector<int>>& nodes, vector<int>& visits,
-    map<int, int>& nodeDepth, map<int, bool>& swaps,
-    int node) {
+    map<int, bool>& swaps, int node, int depth) {
 
-    auto fndNode = nodes.find(node / 2);
-    int nodeValue = node == 1 ? 1 : fndNode != nodes.end() ? fndNode->second[node % 2] : -1;
-    if (nodeValue == -1) return;
-    int nodeLeft = node * 2;
-    int nodeRight = node * 2 + 1;
-    bool inverted = swaps[nodeDepth[node]];
-    traverseNodes(nodes, visits, nodeDepth, swaps, inverted ? nodeRight : nodeLeft);
-    visits.push_back(nodeValue);
-    traverseNodes(nodes, visits, nodeDepth, swaps, inverted ? nodeLeft : nodeRight);
+    if (node == -1) return;
+    auto& childNodes = nodes[node];
+    bool inverted = swaps[depth];
+    int nodeLeft = inverted ? childNodes[1] : childNodes[0];
+    int nodeRight = inverted ? childNodes[0] : childNodes[1];
+    traverseNodes(nodes, visits, swaps, nodeLeft, depth + 1);
+    visits.push_back(node);
+    traverseNodes(nodes, visits, swaps, nodeRight, depth + 1);
 }
 
 vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) {
@@ -36,18 +34,22 @@ vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) 
 
     // build nodes map to consider empty nodes
     map<int, vector<int>> nodes;
-    map<int, int> nodeDepth;
-    nodeDepth[1] = 1;
-    int depth = 1;
+    int maxDepth = 1;
     int idx = 0;
-    list<vector<int>> parents{ { 1, 1 } }; // parent, depth
+    list<int> parents{ 1 }; // root
     do {
-        vector<int> parent = parents.front();
-        nodes[parent[0]] = indexes[idx];
-        nodeDepth[parent[0]] = parent[1];
-        depth = parent[1];
-        if (indexes[idx][0] != -1) parents.push_back(vector<int>{parent[0] * 2, parent[1] + 1});
-        if (indexes[idx][1] != -1) parents.push_back(vector<int>{parent[0] * 2 + 1, parent[1] + 1});
+        int parent = parents.front();
+        auto& childNodes = nodes[parent] = indexes[idx];
+        bool oneMoreDepth = false;
+        if (childNodes[0] != -1) {
+            parents.push_back(childNodes[0]);
+            oneMoreDepth = true;
+        }
+        if (childNodes[1] != -1) {
+            parents.push_back(childNodes[1]);
+            oneMoreDepth = true;
+        }
+        if (oneMoreDepth) ++maxDepth;
         ++idx;
         parents.pop_front();
     } while (parents.size());
@@ -55,11 +57,11 @@ vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) 
     // build each swap list before visiting tree
     map<int, bool> swaps;
     for (int q : queries) {
-        for (int i = q; i <= depth; i += q) {
+        for (int i = q; i <= maxDepth; i += q) {
             swaps[i] = !swaps[i]; // toogle swap
         }
         vector<int> visits;
-        traverseNodes(nodes, visits, nodeDepth, swaps, 1);
+        traverseNodes(nodes, visits, swaps, 1, 1);
         screenshots.push_back(visits);
     }
 
