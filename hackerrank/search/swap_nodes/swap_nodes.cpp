@@ -34,30 +34,20 @@ void traverseNodes(map<int, vector<int>>& nodes, vector<int>& visits,
 vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) {
     vector<vector<int>> screenshots;
 
-    // build nodeXdepth relation
-    map<int, int> nodeDepth;
-    nodeDepth[1] = 1;
-    nodeDepth[2] = nodeDepth[3] = 2;
-    int node = 4;
-    int depth = 3;
-    int endDepth = 8;
-    while (node < indexes.size()) {
-        while (node < endDepth) {
-            nodeDepth[node++] = depth;
-        }
-        ++depth;
-        endDepth *= 2;
-    }
-
     // build nodes map to consider empty nodes
     map<int, vector<int>> nodes;
+    map<int, int> nodeDepth;
+    nodeDepth[1] = 1;
+    int depth = 1;
     int idx = 0;
-    list<int> parents{ 1 };
+    list<vector<int>> parents{ { 1, 1 } }; // parent, depth
     do {
-        int parent = parents.front();
-        nodes[parent] = indexes[idx];
-        if (indexes[idx][0] != -1) parents.push_back(parent * 2);
-        if (indexes[idx][1] != -1) parents.push_back(parent * 2 + 1);
+        vector<int> parent = parents.front();
+        nodes[parent[0]] = indexes[idx];
+        nodeDepth[parent[0]] = parent[1];
+        depth = parent[1];
+        if (indexes[idx][0] != -1) parents.push_back(vector<int>{parent[0] * 2, parent[1] + 1});
+        if (indexes[idx][1] != -1) parents.push_back(vector<int>{parent[0] * 2 + 1, parent[1] + 1});
         ++idx;
         parents.pop_front();
     } while (parents.size());
