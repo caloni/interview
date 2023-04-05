@@ -1,0 +1,3 @@
+[submodule "think-cell"]
+	path = think-cell
+	url = git@github.com:Caloni/think-cell.git
