@@ -6,8 +6,8 @@ using namespace std;
 vector<string> split_string(string);
 
 // Complete the triplets function below.
-long triplets(vector<int> a, vector<int> b, vector<int> c) {
-    long total = 0;
+long long triplets(vector<int> a, vector<int> b, vector<int> c) {
+    long long total = 0;
 
     sort(a.begin(), a.end());
     auto last = unique(a.begin(), a.end());
@@ -21,33 +21,13 @@ long triplets(vector<int> a, vector<int> b, vector<int> c) {
     last = unique(c.begin(), c.end());
     c.erase(last, c.end());
 
-    for (int p = a.size() - 1; p >= 0; --p) {
-        int q = b.size() - 1;
-        int r1 = 0, r2 = 0;
-        if (a[p] <= b[q]) {
-            --q;
-            while (q >= 0 && a[p] <= b[q]) --q;
-            ++q;
-            for (int qi = q; qi < b.size() && r2 < c.size(); ++qi) {
-                if (b[qi] >= c[r2]) {
-                    ++r2;
-                    while (r2 < c.size() && b[qi] >= c[r2]) ++r2;
-                    --r2;
-
-                    cout << "(" << a[p] << "," << b[qi] << "," << c[r1] << ") ... (" << a[p] << "," << b[b.size()-1] << "," << c[r2] << ")\n";
-                    /*
-                    for (int i = qi; i < b.size(); ++i) {
-                        for (int j = r1; j < r2 + 1; ++j) {
-                            cout << "(" << a[p] << "," << b[i] << "," << c[j] << ")\n";
-                        }
-                    }
-                    */
-                    int tripleRange = (b.size() - qi) * (r2 - r1 + 1);
-                    total += tripleRange;
-                    r1 = ++r2;
-                }
-            }
-        }
+    for (int p : b) {
+        auto q = upper_bound(a.begin(), a.end(), p);
+        auto r = upper_bound(c.begin(), c.end(), p);
+        auto qIdx = distance(a.begin(), q);
+        auto rIdx = distance(c.begin(), r);
+        auto range = qIdx * rIdx;
+        total += range;
     }
 
     return total;
@@ -107,7 +87,7 @@ int main()
         arrc[i] = arrc_item;
     }
 
-    long ans = triplets(arra, arrb, arrc);
+    long long ans = triplets(arra, arrb, arrc);
 
     fout << ans << "\n";
 
