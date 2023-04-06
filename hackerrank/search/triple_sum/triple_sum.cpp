@@ -21,14 +21,30 @@ long triplets(vector<int> a, vector<int> b, vector<int> c) {
     last = unique(c.begin(), c.end());
     c.erase(last, c.end());
 
-    for (int p = 0; p < a.size(); ++p) {
-        for (int q = 0; q < b.size(); ++q) {
-            if (a[p] <= b[q]) {
-                for (int r = 0; r < c.size(); ++r) {
-                    if (b[q] >= c[r]) {
-                        //cout << "(" << a[p] << "," << b[q] << "," << c[r] << ")\n";
-                        ++total;
+    for (int p = a.size() - 1; p >= 0; --p) {
+        int q = b.size() - 1;
+        int r1 = 0, r2 = 0;
+        if (a[p] <= b[q]) {
+            --q;
+            while (q >= 0 && a[p] <= b[q]) --q;
+            ++q;
+            for (int qi = q; qi < b.size() && r2 < c.size(); ++qi) {
+                if (b[qi] >= c[r2]) {
+                    ++r2;
+                    while (r2 < c.size() && b[qi] >= c[r2]) ++r2;
+                    --r2;
+
+                    cout << "(" << a[p] << "," << b[qi] << "," << c[r1] << ") ... (" << a[p] << "," << b[b.size()-1] << "," << c[r2] << ")\n";
+                    /*
+                    for (int i = qi; i < b.size(); ++i) {
+                        for (int j = r1; j < r2 + 1; ++j) {
+                            cout << "(" << a[p] << "," << b[i] << "," << c[j] << ")\n";
+                        }
                     }
+                    */
+                    int tripleRange = (b.size() - qi) * (r2 - r1 + 1);
+                    total += tripleRange;
+                    r1 = ++r2;
                 }
             }
         }
