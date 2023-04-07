@@ -7,21 +7,27 @@ vector<string> split_string(string);
 
 // Complete the minTime function below.
 long minTime(vector<long> machines, long goal) {
+    sort(machines.begin(), machines.end());
     struct ProdMachine { long currDay; long days; };
-    auto prodMachineCmd = [](ProdMachine m1, ProdMachine m2) { return m2.currDay < m1.currDay; };
-    priority_queue<ProdMachine, vector<ProdMachine>, decltype(prodMachineCmd)> days(prodMachineCmd);
+    vector<ProdMachine> days;
     for (long m : machines) {
         ProdMachine pm = { m, m };
-        days.push(pm);
+        days.push_back(pm);
     }
     long currDay = 0;
     while (goal > 0) {
-        ProdMachine machine = days.top();
+        ProdMachine& machine = *days.begin();
         currDay = machine.currDay;
-        machine.currDay += machine.days;
-        days.pop();
-        days.push(machine);
         --goal;
+        machine.currDay += machine.days;
+
+        if (goal % 100000 == 0) {
+            cout << "goal: " << goal << endl;
+        }
+
+        for (long i = 0; i < days.size() - 1 && days[i + 1].currDay < days[i].currDay; ++i) {
+            swap(days[i], days[i + 1]);
+        }
     }
     return currDay;
 }
