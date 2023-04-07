@@ -7,29 +7,39 @@ vector<string> split_string(string);
 
 // Complete the minTime function below.
 long minTime(vector<long> machines, long goal) {
+    auto calcItems = [&machines](long days) {
+        long items = 0;
+        for (auto m : machines) {
+            items += days / m;
+        }
+        return items;
+    };
     sort(machines.begin(), machines.end());
-    struct ProdMachine { long currDay; long days; };
-    vector<ProdMachine> days;
-    for (long m : machines) {
-        ProdMachine pm = { m, m };
-        days.push_back(pm);
-    }
-    long currDay = 0;
-    while (goal > 0) {
-        ProdMachine& machine = *days.begin();
-        currDay = machine.currDay;
-        --goal;
-        machine.currDay += machine.days;
 
-        if (goal % 100000 == 0) {
-            cout << "goal: " << goal << endl;
+    long bestCase = machines[0];
+    long worstCase = machines[machines.size()-1] * goal;
+    long middleCase = bestCase + ((worstCase - bestCase) / 2);
+
+    while (true) {
+        long items = calcItems(middleCase);
+
+        if (items < goal) {
+            bestCase = middleCase;
+        }
+        else {
+            worstCase = middleCase;
         }
 
-        for (long i = 0; i < days.size() - 1 && days[i + 1].currDay < days[i].currDay; ++i) {
-            swap(days[i], days[i + 1]);
+        long newMiddle = bestCase + ((worstCase - bestCase) / 2);
+        if (newMiddle == middleCase) {
+            break;
+        }
+        else {
+            middleCase = newMiddle;
         }
     }
-    return currDay;
+
+    return worstCase;
 }
 
 int main()
