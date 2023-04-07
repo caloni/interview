@@ -7,31 +7,23 @@ vector<string> split_string(string);
 
 // Complete the minTime function below.
 long minTime(vector<long> machines, long goal) {
-    struct ProdDay { long machines; map<long, long> increments; };
-    map<long, ProdDay> days;
-
+    struct ProdMachine { long currDay; long days; };
+    auto prodMachineCmd = [](ProdMachine m1, ProdMachine m2) { return m2.currDay < m1.currDay; };
+    priority_queue<ProdMachine, vector<ProdMachine>, decltype(prodMachineCmd)> days(prodMachineCmd);
     for (long m : machines) {
-        auto& day = days[m];
-        ++day.machines;
-        ++day.increments[m];
+        ProdMachine pm = { m, m };
+        days.push(pm);
     }
-
-    int day = 0;
+    long currDay = 0;
     while (goal > 0) {
-        ++day;
-        auto fndDay = days.find(day);
-        if (fndDay != days.end()) {
-            goal -= fndDay->second.machines;
-            auto increments = fndDay->second.increments;
-            for (auto inc : increments) {
-                auto& d = days[day + inc.first];
-                d.machines += inc.second;
-                d.increments[inc.first] = inc.second;
-            }
-        }
-    };
-
-    return day;
+        ProdMachine machine = days.top();
+        currDay = machine.currDay;
+        machine.currDay += machine.days;
+        days.pop();
+        days.push(machine);
+        --goal;
+    }
+    return currDay;
 }
 
 int main()
