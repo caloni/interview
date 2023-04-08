@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.21.1)
+project(strings)
 add_subdirectory(making_anagrams)
 add_subdirectory(alternating_characters)
 add_subdirectory(sherlock_and_valid_strings)

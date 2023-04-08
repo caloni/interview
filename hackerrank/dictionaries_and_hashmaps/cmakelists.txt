@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.21.1)
+project(dictionaries_and_hashmaps)
 add_subdirectory(ransom_note)
 add_subdirectory(two_strings)
 add_subdirectory(sherlock_and_anagrams)

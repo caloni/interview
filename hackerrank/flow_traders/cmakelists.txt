@@ -1,3 +1,4 @@
 cmake_minimum_required(VERSION 3.21.1)
+project(flow_traders)
 add_subdirectory(cardinality_sorting)
 add_subdirectory(portfolio_balances)

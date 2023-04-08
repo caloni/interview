@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.21.1)
+project(greedy_algorithms)
 add_subdirectory(minimum_absolute_difference)
 add_subdirectory(luck_balance)
 add_subdirectory(greedy_flourist)

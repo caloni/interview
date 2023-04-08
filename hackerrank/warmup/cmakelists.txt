@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.21.1)
+project(warmup)
 add_subdirectory(counting_valleys)
 add_subdirectory(jumping_on_the_clouds)
 add_subdirectory(repeated_strings)

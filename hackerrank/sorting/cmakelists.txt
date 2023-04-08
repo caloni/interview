@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.21.1)
+project(sorting)
 add_subdirectory(bubble_sort)
 add_subdirectory(mark_and_toys)
 add_subdirectory(sorting_comparator)
