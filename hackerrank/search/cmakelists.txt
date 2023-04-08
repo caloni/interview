@@ -4,4 +4,5 @@ add_subdirectory(swap_nodes)
 add_subdirectory(pairs)
 add_subdirectory(triple_sum)
 add_subdirectory(machines)
+add_subdirectory(maximum_subarray_sum)
 
