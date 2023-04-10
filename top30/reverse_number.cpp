@@ -17,7 +17,7 @@ Answer: Reversal of a number is achieved in the following steps:
 A much more simple logic is to convert it to string and
 reverse the string. I would go that way in a interview.
 */
-int ReverseNumber(int number)
+int ReverseNumberStringVersion(int number)
 {
     string s = to_string(number);
     size_t beg = 0, end = s.size() - 1;
@@ -32,30 +32,45 @@ int ReverseNumber(int number)
     return stoi(s);
 }
 
+int ReverseNumberNumberVersion(int number)
+{
+    int reversedNumber = 0;
+
+    while (number) {
+        reversedNumber *= 10;
+        int next = number % 10;
+        reversedNumber += next;
+        number /= 10;
+    }
+
+    return reversedNumber;
+}
+
+
 void ReverseNumber()
 {
     int number = 123456789;
-    int reverseNumber = ReverseNumber(number);
+    int reverseNumber = ReverseNumberNumberVersion(number);
     cout << "the reversed version of " << number << " is " << reverseNumber << endl;
 
     number = 787878;
-    reverseNumber = ReverseNumber(number);
+    reverseNumber = ReverseNumberNumberVersion(number);
     cout << "the reversed version of " << number << " is " << reverseNumber << endl;
 
     number = 192837;
-    reverseNumber = ReverseNumber(number);
+    reverseNumber = ReverseNumberNumberVersion(number);
     cout << "the reversed version of " << number << " is " << reverseNumber << endl;
 
     number = 1;
-    reverseNumber = ReverseNumber(number);
+    reverseNumber = ReverseNumberNumberVersion(number);
     cout << "the reversed version of " << number << " is " << reverseNumber << endl;
 
     number = 0;
-    reverseNumber = ReverseNumber(number);
+    reverseNumber = ReverseNumberNumberVersion(number);
     cout << "the reversed version of " << number << " is " << reverseNumber << endl;
 
     number = 10;
-    reverseNumber = ReverseNumber(number);
+    reverseNumber = ReverseNumberNumberVersion(number);
     cout << "the reversed version of " << number << " is " << reverseNumber << endl;
 }
 

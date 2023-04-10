@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21.1)
 project(top30)
-add_executable(top30 interview.cpp interview.hpp
+add_executable(top30 interview.cpp interview.hpp README.md
     anagrams.cpp
     array_reversal.cpp
     bubble_sort.cpp
