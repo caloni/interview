@@ -7,13 +7,18 @@ string ltrim(const string &);
 string rtrim(const string &);
 
 /*
- * Complete the 'repeatedString' function below.
- *
- * The function is expected to return a LONG_INTEGER.
- * The function accepts following parameters:
- *  1. STRING s
- *  2. LONG_INTEGER n
- */
+To solve the [repeated string problem] we count the 'a' occurrences for the full
+unique string and divide n by the size of the unique string size, getting the
+number of times we need to multiply the full occurrences.
+
+For the partial string after the number of full unique strings we format this
+string and count independently this last part.
+
+The total of occurrences is calculated multiplying the times there will be full
+unique strings and sum up the partial string 'a' occurrences.
+
+This algorithm has a complexity of O(n) because we got to count every char.
+*/
 
 long repeatedString(string s, long n) {
     long fullOccur = (long) count(s.begin(), s.end(), 'a');

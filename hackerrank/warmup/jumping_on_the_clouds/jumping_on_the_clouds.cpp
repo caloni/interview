@@ -8,12 +8,13 @@ string rtrim(const string&);
 vector<string> split(const string&);
 
 /*
- * Complete the 'jumpingOnClouds' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY c as parameter.
- */
+To solve the [cloud jump problem] create a loop and advance current position until
+finished. Try the double jump at first and ordinary jump else by incrementing
+position by 1 or 2 and incrementing jump counter. If in the end position just
+increment and get out of the loop. Return the jump counter.
 
+This solution has a complexity of O(n).
+*/
 int jumpingOnClouds(vector<int> c) {
     int jumps = 0;
     size_t i = 0;

@@ -5,7 +5,16 @@ using namespace std;
 
 vector<string> split_string(string);
 
-// Complete the sockMerchant function below.
+/*
+To solve the [sales by match] problem we traverse all the array of socks and
+keep inserting and deleting a set of colors. If the current color is not found
+in the set we insert it. If the current color is found we increase a pair
+counter and remove the color from the set. The next time the same color appears
+it will be inserted again waiting for its pair.
+
+The complexity of this solution is O(n) I guess, since we have to traverse all
+array of socks. I am not counting the operations into the set.
+*/
 int sockMerchant(int n, vector<int> ar)
 {
     int ret = 0;

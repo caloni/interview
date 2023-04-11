@@ -7,14 +7,14 @@ string ltrim(const string&);
 string rtrim(const string&);
 
 /*
- * Complete the 'countingValleys' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER steps
- *  2. STRING path
- */
+To solve the [counting valleys problem] keep a valley counter that only increments
+when the hiker is coming up to the sea level. Monitor the altitude and the new
+altitude and compare. If the altitude was negative (into a valley) and the new
+altitude is zero (sea level) then that's a new valley to count. This strategy
+avoid to count valleys inside valleys before the hiker gets up to sea level.
 
+This solution has a complexity of O(n).
+*/
 int countingValleys(int steps, string path) {
     int valleys = 0;
     int altitude = 0;
@@ -23,6 +23,7 @@ int countingValleys(int steps, string path) {
     {
         int step = path[s] == 'D' ? -1 : 1;
         int newAltitude = altitude + step;
+
         if (altitude < 0 && newAltitude == 0)
         {
             valleys++;
