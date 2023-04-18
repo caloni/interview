@@ -1,5 +1,4 @@
 // https://www.hackerrank.com/challenges/crush/problem
-// https://en.wikipedia.org/wiki/Segment_tree
 #include <stdc++.h>
 
 using namespace std;
@@ -9,57 +8,53 @@ string rtrim(const string &);
 vector<string> split(const string &);
 
 /*
- * Complete the 'arrayManipulation' function below.
- *
- * The function is expected to return a LONG_INTEGER.
- * The function accepts following parameters:
- *  1. INTEGER n
- *  2. 2D_INTEGER_ARRAY queries
- *
- * ChatGPT helped me to solve this problem with the code and explaining
- * that the fastest solution to this problem is using a segment tree. A
- * segment tree is like a binary tree that keeps the value in segments,
- * avoiding the O(n) complexity using a binary search. In this way, to
- * update the intervals in the problem is a recursive task using a 4-size
- * array in that the position is structure as a binary tree. To the query
- * for the lastest value we need to add all the values in each range. It
- * is somewhat tricky for me to understand this part, but I got the
- * general idea.
- */
+To solve the [array manipulation problem] ChatGPT helped me with the code.
+Now in the review I realized how segment tree work and how binary trees can
+be implemented using arrays.
 
-// Segment tree implementation
+The issue about this problem is that summing up intervals costs too much
+processing to large intervals. In order to do that segment trees help, since
+theirs nodes contain the sum of all its nodes bellow. This way, to get the sum
+of determined intervals all we need to do is to get the bigger intervals and sum
+it up.
+*/
 
-void update(int v, int tl, int tr, int l, int r, int x, vector<long>& t) {
-    if (l > r) return;
-    if (l == tl && r == tr) {
-        t[v] += x;
+// Segment tree to array manipulation implementation
+//
+
+long query(int node, int left, int right, int pos, const vector<long>& tree) {
+    if (left == right) {
+        return tree[node];
     }
     else {
-        int tm = (tl + tr) / 2;
-        update(v * 2, tl, tm, l, min(r, tm), x, t);
-        update(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r, x, t);
+        int nodeLeft = 2 * node;
+        int nodeRight = 2 * node + 1;
+        int middle = (left + right) / 2;
+        if (pos <= middle)
+            return tree[node] + query(nodeLeft, left, middle, pos, tree);
+        else
+            return tree[node] + query(nodeRight, middle + 1, right, pos, tree);
     }
 }
 
-long query(int v, int tl, int tr, int pos, vector<long>& t) {
-    if (tl == tr) {
-        return t[v];
+void update(int node, int left, int right, int posLeft, int posRight, int value, vector<long>& tree) {
+    if (posLeft > posRight) return;
+    if (posLeft == left && posRight == right) {
+        tree[node] += value;
     }
     else {
-        int tm = (tl + tr) / 2;
-        if (pos <= tm) {
-            return t[v] + query(v * 2, tl, tm, pos, t);
-        }
-        else {
-            return t[v] + query(v * 2 + 1, tm + 1, tr, pos, t);
-        }
+        int nodeLeft = 2 * node;
+        int nodeRight = 2 * node + 1;
+        int middle = (left + right) / 2;
+        update(nodeLeft, left, middle, posLeft, min(posRight, middle), value, tree);
+        update(nodeRight, middle + 1, right, max(posLeft, middle + 1), posRight, value, tree);
     }
 }
 
+// Solution
 long arrayManipulation(int n, vector<vector<int>> queries) {
     int m = queries.size();
-
-    vector<long> t(4 * n); // segment tree of size 4 * n
+    vector<long> t(4 * n); // room for binary tree
 
     for (int i = 0; i < m; i++) {
         int l, r, x;
