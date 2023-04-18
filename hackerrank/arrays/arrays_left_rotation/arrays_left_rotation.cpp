@@ -8,26 +8,34 @@ string rtrim(const string &);
 vector<string> split(const string &);
 
 /*
- * Complete the 'rotLeft' function below.
- *
- * The function is expected to return an INTEGER_ARRAY.
- * The function accepts following parameters:
- *  1. INTEGER_ARRAY a
- *  2. INTEGER d
- */
+The first solution for this problem to me was very straighforward to solve. I
+just created a second array and copied the elements in its new positions.
 
+However, when studying about rotating hash tables, where I can sum up some
+value to all the keys, I stepped on an algorithm in STL called rotate, that
+applies to vector. The implementation is somewhat confusing, but I think is
+worth to try to understand in order to use it in other similar issues.
+
+STL implementation:
+
+```
+template <class ForwardIterator>
+  void rotate (ForwardIterator first, ForwardIterator middle,
+               ForwardIterator last)
+{
+  ForwardIterator next = middle;
+  while (first!=next)
+  {
+    swap (*first++,*next++);
+    if (next==last) next=middle;
+    else if (first==middle) middle=next;
+  }
+}
+```
+*/
 vector<int> rotLeft(vector<int> a, int d) {
-    vector<int> ra(a.size());
-
-    auto it = a.begin();
-    advance(it, d);
-    copy(it, a.end(), ra.begin());
-
-    auto it2 = ra.begin();
-    advance(it2, a.size() - d);
-    copy(a.begin(), it, it2);
-
-    return ra;
+    rotate(a.begin(), a.begin() + d, a.end());
+    return a;
 }
 
 int main()
