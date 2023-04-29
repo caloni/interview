@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(ransom_note ransom_note.cpp)
+target_include_directories(ransom_note PUBLIC ../../..)

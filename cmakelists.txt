@@ -1,37 +1,5 @@
-cmake_minimum_required (VERSION 2.8.11)
-project (interview)
-add_executable (interview .gitignore README.md Doxyfile interview.cpp interview.hpp
-    anagrams.cpp
-    array_reversal.cpp
-    bubble_sort.cpp
-    compress_numbers_in_strings.cpp
-    count_string.cpp
-    extreme_numbers.cpp
-    fibonacci.cpp
-    first_unique_character.cpp
-    insertion_sort.cpp
-    linked_list_count.cpp
-    linked_list_get.cpp
-    linked_list_find.cpp
-    linked_list_middle.cpp
-    linked_list_remove_equal.cpp
-    linked_list_reverse.cpp
-    matching_characters.cpp
-    matching_integers.cpp
-    missing_number.cpp
-    number_factors.cpp
-    numerical_digits.cpp
-    prime_number.cpp
-    remove_special_characters.cpp
-    reverse_number.cpp
-    reverse_string.cpp
-    rotation_mutually.cpp
-    second_largest.cpp
-    swap_string.cpp
-    unique_integers.cpp
-    vowels_and_consonants.cpp
-)
-if(WIN32)
-target_compile_definitions(interview PUBLIC _CRT_SECURE_NO_WARNINGS)
-endif(WIN32)
+cmake_minimum_required(VERSION 3.21.1)
+project(interview)
+add_subdirectory(top30)
+add_subdirectory(hackerrank)
 

@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(alternating_characters alternating_characters.cpp)
+target_include_directories(alternating_characters PUBLIC ../../..)

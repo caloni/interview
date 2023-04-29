@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(ice_cream_parlor ice_cream_parlor.cpp)
+target_include_directories(ice_cream_parlor PUBLIC ../../..)

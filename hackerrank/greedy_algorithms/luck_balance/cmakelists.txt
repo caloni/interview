@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(luck_balance luck_balance.cpp)
+target_include_directories(luck_balance PUBLIC ../../..)

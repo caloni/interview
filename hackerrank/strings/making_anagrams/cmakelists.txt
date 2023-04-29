@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(making_anagrams making_anagrams.cpp)
+target_include_directories(making_anagrams PUBLIC ../../..)

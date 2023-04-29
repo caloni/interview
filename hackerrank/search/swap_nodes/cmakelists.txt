@@ -1,0 +1,3 @@
+cmake_minimum_required(VERSION 3.21.1)
+add_executable(swap_nodes swap_nodes.cpp)
+target_include_directories(swap_nodes PUBLIC ../../..)
